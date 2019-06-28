@@ -7,7 +7,6 @@ import json
 from datetime import timedelta, datetime
 
 from sc2reader.log_utils import loggable
-from sc2reader.exceptions import MPQError
 from sc2reader.constants import COLOR_CODES, COLOR_CODES_INV
 
 
@@ -115,40 +114,7 @@ def get_real_type(teams):
 
 
 def extract_data_file(data_file, archive):
-    def recovery_attempt():
-        try:
-            return archive.read_file(data_file)
-        except Exception:
-            return None
-
-    # Wrap all mpyq related exceptions so they can be distinguished
-    # from other sc2reader issues later on.
-    try:
-        # Some replays tampered with by 3rd party software report
-        # block sizes wrong. They can either over report or under
-        # report. If they over report a non-compressed file might
-        # attempt decompression. If they under report a compressed
-        # file might bypass decompression. So do this:
-        #
-        # * Force a decompression to catch under reporting
-        # * If that fails, try to process normally
-        # * mpyq doesn't allow you to skip decompression, so fail
-        #
-        # Refs: arkx/mpyq#12, GraylinKim/sc2reader#102
-        try:
-            file_data = archive.read_file(data_file, force_decompress=True)
-        except Exception as e:
-            file_data = recovery_attempt()
-            if file_data is None:
-                raise
-
-        return file_data
-
-    except Exception as e:
-        # Python2 and Python3 handle wrapped exceptions with old tracebacks in incompatible ways
-        # Python3 handles it by default and Python2's method won't compile in python3
-        # Since the underlying traceback isn't important to most people, don't expose it anymore
-        raise MPQError("Unable to extract file: {0}".format(data_file), e)
+    return archive.read_file(data_file)
 
 
 def get_files(
