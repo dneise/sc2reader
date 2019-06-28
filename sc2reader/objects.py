@@ -7,11 +7,7 @@ from collections import namedtuple
 
 from sc2reader import utils, log_utils
 from sc2reader.decoders import ByteDecoder
-from sc2reader.constants import (
-    LOBBY_PROPERTIES,
-    GATEWAY_LOOKUP,
-    LOCALIZED_RACES,
-)
+from sc2reader.constants import LOBBY_PROPERTIES, GATEWAY_LOOKUP, LOCALIZED_RACES
 
 Location = namedtuple("Location", ["x", "y"])
 
