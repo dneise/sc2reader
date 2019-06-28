@@ -1,13 +1,39 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, print_function, unicode_literals, division
 
-import struct
-
 from sc2reader.exceptions import ParseError, ReadError
-from sc2reader.objects import *
-from sc2reader.events.game import *
-from sc2reader.events.message import *
-from sc2reader.events.tracker import *
+from sc2reader.objects import (
+    Attribute,
+)
+from sc2reader.events.game import (
+    UserOptionsEvent,
+    PlayerLeaveEvent,
+    create_command_event,
+    SelectionEvent,
+    create_control_group_event,
+    CameraEvent,
+    HijackReplayGameEvent,
+    UpdateTargetPointCommandEvent,
+    UpdateTargetUnitCommandEvent,
+)
+from sc2reader.events.message import (
+    ChatEvent,
+    PingEvent,
+    ProgressEvent,
+
+)
+from sc2reader.events.tracker import (
+    PlayerStatsEvent,
+    UnitBornEvent,
+    UnitDiedEvent,
+    UnitOwnerChangeEvent,
+    UnitTypeChangeEvent,
+    UpgradeCompleteEvent,
+    UnitInitEvent,
+    UnitDoneEvent,
+    UnitPositionsEvent,
+    PlayerSetupEvent,
+)
 from sc2reader.utils import DepotFile
 from sc2reader.decoders import BitPackedDecoder, ByteDecoder
 

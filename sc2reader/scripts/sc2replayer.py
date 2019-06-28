@@ -40,7 +40,14 @@ except ImportError as e:
 
 import argparse
 import sc2reader
-from sc2reader.events import *
+from sc2reader.events import (
+    CommandEvent,
+    SelectionEvent,
+    PlayerLeaveEvent,
+    GameStartEvent,
+    HotkeyEvent,
+    CameraEvent,
+)
 
 
 def main():

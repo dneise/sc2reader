@@ -2,7 +2,14 @@
 from __future__ import absolute_import, print_function, unicode_literals, division
 
 import collections
-from sc2reader.events import *
+from sc2reader.events import (
+    Event,
+    MessageEvent,
+    GameEvent,
+    TrackerEvent,
+    CommandEvent,
+    ControlGroupEvent,
+)
 from sc2reader.engine.events import InitGameEvent, EndGameEvent, PluginExit
 
 
